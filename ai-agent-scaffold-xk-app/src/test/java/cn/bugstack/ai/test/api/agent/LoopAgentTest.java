@@ -21,7 +21,7 @@ import java.util.Map;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
-public class LoopAgentTest {
+public class  LoopAgentTest {
 
     private static final String APP_NAME = "IterativeWritingPipeline";
     private static final String USER_ID = "test_user_456";

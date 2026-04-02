@@ -139,6 +139,7 @@
             <groupId>cn.bugstack.ai</groupId>
             <artifactId>ai-agent-scaffold-xk-infrastructure</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>

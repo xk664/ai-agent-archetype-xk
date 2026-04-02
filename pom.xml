@@ -209,6 +209,7 @@
                 <artifactId>ai-agent-scaffold-xk-trigger</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
