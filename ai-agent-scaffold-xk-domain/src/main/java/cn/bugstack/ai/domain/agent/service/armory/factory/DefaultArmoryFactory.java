@@ -1,17 +1,25 @@
 package cn.bugstack.ai.domain.agent.service.armory.factory;
 
 import cn.bugstack.ai.domain.agent.model.entity.ArmoryCommandEntity;
+import cn.bugstack.ai.domain.agent.model.valobj.AiAgentConfigTableVO;
 import cn.bugstack.ai.domain.agent.model.valobj.AiAgentRegisterVO;
 import cn.bugstack.ai.domain.agent.service.armory.node.RootNode;
 import cn.bugstack.wrench.design.framework.tree.StrategyHandler;
+import com.google.adk.agents.BaseAgent;
+import com.google.adk.agents.SequentialAgent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.openai.api.OpenAiApi;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +47,26 @@ public class DefaultArmoryFactory {
     @NoArgsConstructor
     public static class DynamicContext {
 
+        /**
+         * AiApi
+         *
+         */
+        private OpenAiApi aiApi;
+
+        /**
+         * ChatModel
+         */
+
+        private ChatModel chatModel;
+        /**
+         * 最后一个智能体
+         */
+        private SequentialAgent sequentialAgent;
+
+        private List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflowsConfig=new ArrayList<>();
+
+        private Map<String, BaseAgent> AgentGroup=new HashMap<>();
+
         private Map<String, Object> dataObjects = new HashMap<>();
 
         public <T> void setValue(String key, T value) {
@@ -49,6 +77,17 @@ public class DefaultArmoryFactory {
             return (T) dataObjects.get(key);
         }
 
+        public List<BaseAgent> queryAgentList(List<String> agentNames){
+            List<BaseAgent> baseAgents=new ArrayList<>();
+            for(String agentName:agentNames){
+                BaseAgent baseAgent=AgentGroup.get(agentName);
+                if(baseAgent!=null){
+                    baseAgents.add(baseAgent);
+                }
+            }
+            return baseAgents;
+        }
     }
+
 
 }
