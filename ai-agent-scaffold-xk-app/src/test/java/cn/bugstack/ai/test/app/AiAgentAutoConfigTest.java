@@ -61,7 +61,7 @@ public class AiAgentAutoConfigTest {
                 .createSession(appName, "xiaofuge")
                 .blockingGet();
 
-        Content userMsg = Content.fromParts(Part.fromText("给我一份学习计划"));
+        Content userMsg = Content.fromParts(Part.fromText("把xiaofuge转换为大写"));
         Flowable<Event> events = runner.runAsync("xiaofuge", session.id(), userMsg);
 
         List<String> outputs = new ArrayList<>();
@@ -69,5 +69,4 @@ public class AiAgentAutoConfigTest {
 
         log.info("测试结果:{}", JSON.toJSONString(outputs));
     }
-
 }
