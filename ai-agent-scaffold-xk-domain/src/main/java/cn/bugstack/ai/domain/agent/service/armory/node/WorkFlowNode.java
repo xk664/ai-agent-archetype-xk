@@ -35,22 +35,25 @@ public class WorkFlowNode extends AbstractArmorySupport {
 
         List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflowsConfig = aiAgentConfigTableVO.getModule().getAgentWorkflows();
 
-        if(null == agentWorkflowsConfig||agentWorkflowsConfig.isEmpty()){
+        if(null == agentWorkflowsConfig||agentWorkflowsConfig.isEmpty()||dynamicContext.getCurrentStepIndex()>=agentWorkflowsConfig.size()){
+            dynamicContext.setCurrentAgentWorkflow(null);
             return router(requestParameter, dynamicContext);
         }
-        dynamicContext.setAgentWorkflowsConfig(agentWorkflowsConfig);
+        AiAgentConfigTableVO.Module.AgentWorkflow currentAgentWorkflow = agentWorkflowsConfig.get(dynamicContext.getCurrentStepIndex());
+        dynamicContext.setCurrentAgentWorkflow(currentAgentWorkflow);
+        dynamicContext.addCurrentStepIndex();
         return router(requestParameter, dynamicContext);
     }
 
     @Override
     public StrategyHandler<ArmoryCommandEntity, DefaultArmoryFactory.DynamicContext, AiAgentRegisterVO> get(ArmoryCommandEntity armoryCommandEntity, DefaultArmoryFactory.DynamicContext dynamicContext) throws Exception {
-        List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflowsConfig = dynamicContext.getAgentWorkflowsConfig();
-        if(null == agentWorkflowsConfig||agentWorkflowsConfig.isEmpty()){
+        AiAgentConfigTableVO.Module.AgentWorkflow currentAgentWorkflow = dynamicContext.getCurrentAgentWorkflow();
+
+        if(null == currentAgentWorkflow){
             return runnerNode;
         }
-        AiAgentConfigTableVO.Module.AgentWorkflow agentWorkflow = agentWorkflowsConfig.get(0);
 
-        String type = agentWorkflow.getType();
+        String type = currentAgentWorkflow.getType();
         AgentTypeEnum agentTypeEnum = AgentTypeEnum.formType(type);
         String node = agentTypeEnum.getNode();
         return switch (node){

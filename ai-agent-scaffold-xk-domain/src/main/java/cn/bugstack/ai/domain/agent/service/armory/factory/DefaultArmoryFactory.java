@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 默认的装配工厂
@@ -60,11 +61,16 @@ public class DefaultArmoryFactory {
         private ChatModel chatModel;
 
 
-        private List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflowsConfig=new ArrayList<>();
 
         private Map<String, BaseAgent> AgentGroup=new HashMap<>();
 
         private Map<String, Object> dataObjects = new HashMap<>();
+
+        private AtomicInteger currentStepIndex =new AtomicInteger(0);
+        /**
+         * 当前WorkFlow
+         */
+        private AiAgentConfigTableVO.Module.AgentWorkflow currentAgentWorkflow;
 
         public <T> void setValue(String key, T value) {
             dataObjects.put(key, value);
@@ -84,6 +90,14 @@ public class DefaultArmoryFactory {
             }
             return baseAgents;
         }
+        public void addCurrentStepIndex(){
+            currentStepIndex.incrementAndGet();
+        }
+
+        public int getCurrentStepIndex(){
+            return currentStepIndex.get();
+        }
+
     }
 
 

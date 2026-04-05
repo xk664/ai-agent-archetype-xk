@@ -25,8 +25,8 @@ public class SequentialAgentNode extends AbstractArmorySupport {
     protected AiAgentRegisterVO doApply(ArmoryCommandEntity requestParameter, DefaultArmoryFactory.DynamicContext dynamicContext) throws Exception {
         log.info("Ai Agent 装配操作 - SequentialAgentNode");
 
-        List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflows = dynamicContext.getAgentWorkflowsConfig();
-        AiAgentConfigTableVO.Module.AgentWorkflow agentWorkflow = agentWorkflows.remove(0);
+        AiAgentConfigTableVO.Module.AgentWorkflow agentWorkflow = dynamicContext.getCurrentAgentWorkflow();
+
 
         List<String> subAgentNames = agentWorkflow.getSubAgents();
         List<BaseAgent> subAgents = dynamicContext.queryAgentList(subAgentNames);
@@ -50,7 +50,7 @@ public class SequentialAgentNode extends AbstractArmorySupport {
 
     @Override
     public StrategyHandler<ArmoryCommandEntity, DefaultArmoryFactory.DynamicContext, AiAgentRegisterVO> get(ArmoryCommandEntity requestParameter, DefaultArmoryFactory.DynamicContext dynamicContext) throws Exception {
-        return runnerNode;
+        return getBean("workFlowNode");
     }
 
 }
