@@ -58,10 +58,7 @@ public class DefaultArmoryFactory {
          */
 
         private ChatModel chatModel;
-        /**
-         * 最后一个智能体
-         */
-        private SequentialAgent sequentialAgent;
+
 
         private List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflowsConfig=new ArrayList<>();
 

@@ -26,6 +26,8 @@ public class WorkFlowNode extends AbstractArmorySupport {
     private ParallelAgentNode parallelAgentNode;
     @Resource
     private SequentialAgentNode sequentialAgentNode;
+    @Resource
+    private RunnerNode runnerNode;
     @Override
     protected AiAgentRegisterVO doApply(ArmoryCommandEntity requestParameter, DefaultArmoryFactory.DynamicContext dynamicContext) throws Exception {
         log.info("Armory WorkFlow :WorkFlowNode 装配操作");
@@ -33,8 +35,8 @@ public class WorkFlowNode extends AbstractArmorySupport {
 
         List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflowsConfig = aiAgentConfigTableVO.getModule().getAgentWorkflows();
 
-        if(null == agentWorkflowsConfig){
-            throw new RuntimeException("WorkFlows is null");
+        if(null == agentWorkflowsConfig||agentWorkflowsConfig.isEmpty()){
+            return router(requestParameter, dynamicContext);
         }
         dynamicContext.setAgentWorkflowsConfig(agentWorkflowsConfig);
         return router(requestParameter, dynamicContext);
@@ -43,8 +45,8 @@ public class WorkFlowNode extends AbstractArmorySupport {
     @Override
     public StrategyHandler<ArmoryCommandEntity, DefaultArmoryFactory.DynamicContext, AiAgentRegisterVO> get(ArmoryCommandEntity armoryCommandEntity, DefaultArmoryFactory.DynamicContext dynamicContext) throws Exception {
         List<AiAgentConfigTableVO.Module.AgentWorkflow> agentWorkflowsConfig = dynamicContext.getAgentWorkflowsConfig();
-        if(null == agentWorkflowsConfig){
-            throw new RuntimeException("WorkFlows is null");
+        if(null == agentWorkflowsConfig||agentWorkflowsConfig.isEmpty()){
+            return runnerNode;
         }
         AiAgentConfigTableVO.Module.AgentWorkflow agentWorkflow = agentWorkflowsConfig.get(0);
 
