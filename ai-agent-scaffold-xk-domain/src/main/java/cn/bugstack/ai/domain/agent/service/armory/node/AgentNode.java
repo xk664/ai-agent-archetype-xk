@@ -11,11 +11,14 @@ import com.google.adk.models.springai.SpringAI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j
 @Service
 public class AgentNode extends AbstractArmorySupport {
+    @Resource
+    private WorkFlowNode workFlowNode;
     @Override
     protected AiAgentRegisterVO doApply(ArmoryCommandEntity requestParameter, DefaultArmoryFactory.DynamicContext dynamicContext) throws Exception {
         log.info("Armory Agent :Agent节点装配");
@@ -39,6 +42,6 @@ public class AgentNode extends AbstractArmorySupport {
 
     @Override
     public StrategyHandler<ArmoryCommandEntity, DefaultArmoryFactory.DynamicContext, AiAgentRegisterVO> get(ArmoryCommandEntity armoryCommandEntity, DefaultArmoryFactory.DynamicContext dynamicContext) throws Exception {
-        return defaultStrategyHandler;
+        return workFlowNode;
     }
 }

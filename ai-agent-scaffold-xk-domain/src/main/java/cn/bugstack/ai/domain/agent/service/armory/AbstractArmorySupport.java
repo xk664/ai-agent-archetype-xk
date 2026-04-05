@@ -11,6 +11,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 
+import javax.annotation.Resource;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
@@ -18,6 +19,7 @@ public abstract class AbstractArmorySupport extends AbstractMultiThreadStrategyR
 
     protected final Logger log = LoggerFactory.getLogger(AbstractArmorySupport.class);
 
+    @Resource
     protected ApplicationContext applicationContext;
     @Override
     protected void multiThread(ArmoryCommandEntity requestParameter, DefaultArmoryFactory.DynamicContext dynamicContext) throws ExecutionException, InterruptedException, TimeoutException {

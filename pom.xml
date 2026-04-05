@@ -95,6 +95,15 @@
                 <artifactId>dom4j</artifactId>
                 <version>1.6.1</version>
             </dependency>
+            <!-- 添加 Jakarta Bean Validation 依赖 -->
+            <!-- 添加 Jakarta Bean Validation 依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>3.4.3</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>

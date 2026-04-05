@@ -1,6 +1,7 @@
 ai:
   agent:
     config:
+      enabled: true
       tables:
         testAgent:
           app-name: testAgent
@@ -11,21 +12,21 @@ ai:
           module:
             ai-api:
               base-url: https://api.deepseek.com
-              api-key:
+              api-key: sk-56eef28e431a4cdebe93756cd120b899
               completions-path: v1/chat/completions
               embeddings-path: v1/embeddings
             chat-model:
-              model: deepseek.chat
+              model: deepseek-chat
               tool-mcp-list:
                 - sse:
                     name: baidu-search
                     base-uri: http://appbuilder.baidu.com/v2/ai_search/mcp/
-                    sse-endpoint: sse?api_key=bce-v3/ALTAK-3zODLb9qHozIftQlGwez5/2696e92781f5bf1ba1870e2958f239fd6dc822a4
+                    sse-endpoint: sse?api_key=bce-v3/ALTAK-zAcbeJPAq9kiv5v8ZXqSj/1f72b7eee7688aee4f2ef265dcbca4c676e72ba1
                     request-timeout: 5000
                 - sse:
                     name: baidu-map
                     base-uri: https://mcp.map.baidu.com/
-                    sse-endpoint: sse?ak=tV0NsP4Gmj8IL7mhvyjVZ7c6
+                    sse-endpoint: sse?ak=hROR4mbIDoaendVWP7B9IYfkY2C4iVnq
                     request-timeout: 5000
             agents:
               - name: CodeWriterAgent
