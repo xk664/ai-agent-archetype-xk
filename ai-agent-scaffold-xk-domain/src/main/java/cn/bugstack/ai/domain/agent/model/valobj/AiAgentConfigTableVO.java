@@ -77,6 +77,7 @@ public class AiAgentConfigTableVO {
             private String model;
             private List<ToolMcp> toolMcpList;
 
+
             @Data
             public static class ToolMcp {
 
@@ -115,6 +116,8 @@ public class AiAgentConfigTableVO {
                     private String name;
                 }
             }
+
+
         }
 
         @Data
@@ -141,6 +144,7 @@ public class AiAgentConfigTableVO {
         @Data
         public  static class Runner{
             private String agentName;
+            private List<String> pluginNameList;
         }
     }
 
