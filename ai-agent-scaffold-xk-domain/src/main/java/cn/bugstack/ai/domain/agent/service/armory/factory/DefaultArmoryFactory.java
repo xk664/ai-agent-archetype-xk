@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.api.OpenAiApi;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,9 +35,15 @@ public class DefaultArmoryFactory {
 
     @Resource
     private RootNode rootNode;
+    @Resource
+    private ApplicationContext applicationContext;
 
     public StrategyHandler<ArmoryCommandEntity, DynamicContext, AiAgentRegisterVO> armoryStrategyHandler() {
         return rootNode;
+    }
+
+    public AiAgentRegisterVO getAiAgentRegisterVO(String agentId) {
+        return applicationContext.getBean(agentId, AiAgentRegisterVO.class);
     }
 
     /**
