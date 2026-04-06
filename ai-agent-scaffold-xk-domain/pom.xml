@@ -27,6 +27,11 @@
             <groupId>com.google.adk</groupId>
             <artifactId>google-adk</artifactId>
         </dependency>
+        <!-- https://github.com/spring-ai-community/spring-ai-agent-utils -->
+        <dependency>
+            <groupId>org.springaicommunity</groupId>
+            <artifactId>spring-ai-agent-utils</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.google.adk</groupId>
             <artifactId>google-adk-spring-ai</artifactId>

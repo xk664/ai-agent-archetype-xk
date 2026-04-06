@@ -17,12 +17,12 @@ public class LangChain4jApiTest {
 
     public static void main(String[] args) {
         OpenAiChatModel model = OpenAiChatModel.builder()
-                .baseUrl("https://api.deepseek.com")
-                .apiKey("sk-56eef28e431a4cdebe93756cd120b899")
-                .modelName("deepseek-chat")
+                .baseUrl("https://apis.itedus.cn/v1")
+                .apiKey("sk-wtBOjyNviG9NtbYn7f2fF8A2203048Aa86Be6f0f0b824dB9")
+                .modelName("gpt-4o")
                 .build();
 
-        String chat = model.chat("你是谁");
+        String chat = model.chat("hi 你好哇!");
         log.info("测试结果:{}", chat);
     }
 
